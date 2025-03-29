@@ -1,4 +1,5 @@
 import { OnRampStatus, PrismaClient } from '@prisma/client';
+import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
 async function upsertUser(data: {
@@ -18,8 +19,14 @@ async function upsertUser(data: {
         update: {},
         create: {
             phone_number: data.phone_number,
-            password: data.password,
+            password: await bcrypt.hash(data.password,10),
             name: data.name,
+            Balance: {
+                create: {
+                    amount: 20000,
+                    locked: 0
+                }
+            },
             OnRampTransaction: {
                 create: data.transaction,
             },
@@ -42,7 +49,7 @@ async function main() {
     });
 
     const user2 = await upsertUser({
-        phone_number: '1234567890',
+        phone_number: '1234567800',
         password: 'ganesh',
         name: 'ganesh',
         transaction: {
