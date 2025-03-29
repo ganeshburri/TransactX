@@ -14,6 +14,13 @@
     "@prisma/client": "^6.5.0"
   },
   "exports": {
-    "./client" : "./src/index.ts"
+    "./client": "./src/index.ts"
+  },
+  "prisma": {
+    "seed": "node --loader ts-node/esm prisma/seed.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "ts-node": "^10.9.2"
   }
 }
