@@ -9,6 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }): JSX
                     <SideBarItem href="/dashboard" icon={<HomeIcon />} title="Home" />
                     <SideBarItem href="/transfer" icon={<TransferIcon />} title="Transfer" />
                     <SideBarItem href="/transactions" icon={<TransactionsIcon />} title="Transactions" />
+                    <SideBarItem href={"/p2p"} icon={<P2PTransferIcon />} title="P2P Transfer" />
                 </div>
             </div>
             <main className="flex-1">{children}</main>
@@ -69,6 +70,25 @@ function TransactionsIcon(): JSX.Element {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+        </svg>
+    );
+}
+
+function P2PTransferIcon(): JSX.Element {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-6 h-6"
+        >
+            <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
             />
         </svg>
     );
