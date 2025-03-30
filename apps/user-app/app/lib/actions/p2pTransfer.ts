@@ -58,6 +58,16 @@ async function performTransaction(fromId: string, toId: string, amount: number) 
                 where: { userId: toId },
                 data: { amount: { increment: amount } },
             });
+
+            //to track p2p transfers
+            await tx.p2pTransfer.create({
+                data: {
+                    fromUserId: fromId,
+                    toUserId: toId,
+                    amount,
+                    timestamp: new Date(),
+                }
+            })
         });
 
         return { message: "Transaction Successful" };
