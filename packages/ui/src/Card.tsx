@@ -7,7 +7,7 @@ interface CardProps {
 
 export function Card({ title, children }: CardProps): JSX.Element {
     return (
-        <div className="border p-4">
+        <div className="border p-4 rounded-xl shadow">
             <h1 className="text-xl border-b pb-2">{title}</h1>
             <div>{children}</div>
         </div>

@@ -5,11 +5,6 @@ import { OnRampTransactions } from "../../../components/OnRampTransactions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
 
-// Helper function to fetch user session
-async function getUserSession() {
-    return await getServerSession(authOptions);
-}
-
 // Fetch user balance
 async function getBalance(userId: string) {
     const balance = await db.balance.findFirst({
@@ -36,7 +31,7 @@ async function getOnRampTransactions(userId: string) {
 
 // Main page component
 export default async function TransferPage() {
-    const session = await getUserSession();
+    const session = await getServerSession(authOptions);
     const userId = session?.user?.id;
 
     if (!userId) {
