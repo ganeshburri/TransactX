@@ -19,7 +19,7 @@ export async function p2pTransfer(to: string, amount: number) {
 
     try {
         const res = await performTransaction(from, toUser.id, amount);
-        return { message: res.message };
+        return { message: res.message, receiverName: (toUser.name || "") };
     } catch (error) {
         return handleError(error);
     }

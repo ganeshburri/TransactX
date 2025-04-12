@@ -21,5 +21,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.487.0"
+  }
 }

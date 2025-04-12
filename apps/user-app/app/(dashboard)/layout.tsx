@@ -17,7 +17,6 @@ export default function Layout({ children }: { children: React.ReactNode }): JSX
     );
 }
 
-// Icons Fetched from https://heroicons.com/
 function HomeIcon(): JSX.Element {
     return (
         <svg
