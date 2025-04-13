@@ -1,4 +1,3 @@
-import React from 'react';
 import { SendMoneyButton } from '../../../components/SendMoneyButton';
 import { TransactionHistory } from '../../../components/TransactionHistory';
 import { Balance } from '../../../components/Balance';
