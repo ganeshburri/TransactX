@@ -8,7 +8,7 @@ interface SideBarItemProps {
     icon: React.ReactNode;
 }
 
-const SELECTED_COLOR = "text-[#6a51a6]";
+const SELECTED_COLOR = "text-[#4F7DF3]";
 const UNSELECTED_COLOR = "text-slate-500";
 
 export const SideBarItem = ({ href, title, icon }: SideBarItemProps) => {
