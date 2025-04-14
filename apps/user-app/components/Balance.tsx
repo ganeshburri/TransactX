@@ -24,7 +24,7 @@ export const Balance = () => {
         <div className="bg-[#4F7DF3] text-white p-8 rounded-2xl">
             <p className="text-xl mb-2">Balance</p>
             <div className="flex items-center justify-between">
-                <h1 className="text-4xl font-semibold">{balance}</h1>
+                <h1 className="text-4xl font-semibold">{balance.toLocaleString()}</h1>
                 <button className="bg-white text-[#4F7DF3] px-4 py-2
                     rounded-lg flex items-center gap-2 font-medium hover:bg-gray-100"
                     onClick={handleClick}
