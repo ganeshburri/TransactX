@@ -1,16 +1,14 @@
 import { Card } from "@repo/ui/Card";
 
-export const OnRampTransactions = ({
-    transactions,
-}: {
-    transactions: {
-        time: Date;
-        amount: number;
-        // TODO: Can the type of `status` be more specific?
-        status: string;
-        provider: string;
-    }[];
-}) => {
+interface OnRampTransactionsProps{
+    time: Date,
+    amount: number,
+    status: string,
+    provider: string
+}
+
+export const OnRampTransactions = ({ transactions }: { transactions: OnRampTransactionsProps[]; }) => {
+
     if (!transactions.length) {
         return (
             <Card title="Recent Transactions">

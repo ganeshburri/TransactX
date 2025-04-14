@@ -55,7 +55,7 @@ export function SendCard() {
     return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
             <div className="bg-white rounded-xl shadow p-8 w-full max-w-md">
-                <h1 className="text-2xl font-bold text-center mb-6">P2P Transfer</h1>
+                <h1 className="text-2xl font-bold text-blue-500 text-center mb-6">P2P Transfer</h1>
 
                 {success !== null ? (
                     <div className="text-center space-y-4">
@@ -90,7 +90,7 @@ export function SendCard() {
                         )}
                         <button
                             onClick={resetForm}
-                            className="mt-4 w-full bg-black text-white py-2 rounded-lg hover:bg-gray-900"
+                            className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
                         >
                             {success ? 'Send Another Payment' : 'Try Again'}
                         </button>
@@ -143,8 +143,8 @@ export function SendCard() {
                             disabled={loading}
                             className={`w-full py-2 rounded-lg text-white font-semibold ${
                                 loading
-                                    ? 'bg-gray-400 cursor-not-allowed'
-                                    : 'bg-black hover:bg-gray-900'
+                                    ? 'bg-blue-400 cursor-not-allowed'
+                                    : 'bg-blue-500 hover:bg-blue-600'
                             }`}
                         >
                             {loading ? 'Processing…' : 'Send Money →'}

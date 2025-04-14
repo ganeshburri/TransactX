@@ -73,5 +73,5 @@ function formatDate(date: Date) {
 }
 
 function formatAmount(amount: number) {
-    return `₹${amount.toLocaleString()}`;
+    return `₹${(amount/100).toLocaleString()}`;
 }
