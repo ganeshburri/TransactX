@@ -5,6 +5,7 @@ import { Card } from "@repo/ui/Card";
 import { Select } from "@repo/ui/Select";
 import { TextInput } from "@repo/ui/TextInput";
 import { createOnRampTransaction } from "../app/lib/actions/createOnrampTransaction";
+import axios from "axios";
 
 const SUPPORTED_BANKS = [
     {
@@ -33,8 +34,29 @@ export const AddMoney = () => {
     };
 
     const handleAddMoneyClick = async() => {
-        await createOnRampTransaction(provider,amount);
-        window.location.href = redirectUrl || "";
+        const { token, userId } = await createOnRampTransaction(provider,amount);
+        //make a request to Bank webhook
+        setTimeout(async()=> {
+            try {
+                const res = await axios.post(process.env.NEXT_PUBLIC_BANK_WEBHOOK_URL || "http://localhost:3003/hdfcwebhook",
+                    {
+                        token,
+                        user_identifier: userId,
+                        amount: amount * 100
+                    },
+                    {
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    }
+                );
+                console.log(res);
+                window.location.href = redirectUrl || "";
+            }
+            catch(e) {
+                console.log(e)
+            }
+        },2000);
     };
 
     return (

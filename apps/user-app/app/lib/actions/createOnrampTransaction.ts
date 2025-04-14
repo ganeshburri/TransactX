@@ -8,24 +8,27 @@ import { v4 as uuid } from 'uuid';
 export async function createOnRampTransaction(provider: string, amount: number) {
     // Ideally the token should come from the banking provider (hdfc/axis)
     const session = await getServerSession(authOptions);
-    if (!session?.user || !session.user?.id) {
+    const userId = session?.user?.id;
+    if (!userId) {
         return {
             message: "Unauthenticated request"
         }
     }
-    const token = uuid();
+    const token: string = uuid();
     await db.onRampTransaction.create({
         data: {
             provider,
             status: "Processing",
             startTime: new Date(),
             token: token,
-            userId: session?.user?.id,
+            userId: userId,
             amount: amount * 100
         }
     });
 
     return {
-        message: "Done"
+        message: "success",
+        userId,
+        token
     }
 }

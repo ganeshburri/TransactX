@@ -33,7 +33,7 @@ export async function getUserTransactions(userId: string) {
     });
 
     if (!userWithTransfers) {
-        throw new Error("User data not found");
+        return [];
     }
 
     const allTransfers = [
