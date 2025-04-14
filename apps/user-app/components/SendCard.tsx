@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Phone, DollarSign, CheckCircle, XCircle } from 'lucide-react';
+import { Phone, CheckCircle, XCircle } from 'lucide-react';
 import { p2pTransfer } from '../app/lib/actions/p2pTransfer'; //server action
 
 export function SendCard() {
@@ -84,7 +84,7 @@ export function SendCard() {
                                 </div>
                                 <div className="pb-2">
                                     <p className="text-gray-500">Amount</p>
-                                    <p className="text-md font-bold">${amount}</p>
+                                    <p className="text-md font-bold">₹{amount}</p>
                                 </div>
                             </div>
                         )}
@@ -124,7 +124,7 @@ export function SendCard() {
                         <div>
                             <label className="block font-medium mb-1">Amount</label>
                             <div className="flex items-center border rounded-lg px-3 py-2">
-                                <DollarSign className="w-4 h-4 text-gray-400 mr-2" />
+                                <span className='text-slate-400'>₹&nbsp;</span>
                                 <input
                                     type="number"
                                     className="flex-1 outline-none"

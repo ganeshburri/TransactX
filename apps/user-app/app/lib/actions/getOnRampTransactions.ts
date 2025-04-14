@@ -2,6 +2,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth";
 import db from "@repo/db/client";
+import { timeStamp } from "console";
 
 // Fetch user on-ramp transactions
 export async function getOnRampTransactions() {
@@ -13,9 +14,10 @@ export async function getOnRampTransactions() {
     });
     
     return transactions.map(transaction => ({
-        time: transaction.startTime,
+        id: transaction.id,
+        timestamp: transaction.startTime,
         amount: transaction.amount,
-        status: transaction.status,
+        status: transaction.status as string,
         provider: transaction.provider
     }));
 }

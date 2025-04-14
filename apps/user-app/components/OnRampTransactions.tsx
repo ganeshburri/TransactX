@@ -1,7 +1,7 @@
 import { Card } from "@repo/ui/Card";
 
 interface OnRampTransactionsProps{
-    time: Date,
+    timestamp: Date,
     amount: number,
     status: string,
     provider: string
@@ -21,11 +21,11 @@ export const OnRampTransactions = ({ transactions }: { transactions: OnRampTrans
         <Card title="Recent Transactions">
             <div className="pt-2">
                 {transactions.map((t) => (
-                    <div className="flex justify-between" key={t.time.toISOString()}>
+                    <div className="flex justify-between" key={t.timestamp.toISOString()}>
                         <div>
                             <div className="text-sm">INR</div>
                             <div className="text-slate-600 text-xs">
-                                {t.time.toDateString()}
+                                {t.timestamp.toDateString()}
                             </div>
                             <div className="text-slate-600 text-xs">
                                 {t.status}
