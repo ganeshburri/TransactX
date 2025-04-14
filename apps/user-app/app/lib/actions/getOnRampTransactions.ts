@@ -2,7 +2,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth";
 import db from "@repo/db/client";
-import { timeStamp } from "console";
 
 // Fetch user on-ramp transactions
 export async function getOnRampTransactions() {

@@ -7,12 +7,14 @@ import { getBalance } from '../app/lib/actions/getBalance';
 // Balance Card Component
 export const Balance = () => {
     const router = useRouter();
-    const [balance, setBalance] = useState<number>(0)
+    const [balance, setBalance] = useState<number>(0);
 
     useEffect(() => {
         getBalance()
             .then((res) =>{
-                setBalance(res.amount/100)
+                if (res && res.amount !== undefined) {
+                    setBalance(res.amount / 100);
+                }
             })
     }, [balance]);
 

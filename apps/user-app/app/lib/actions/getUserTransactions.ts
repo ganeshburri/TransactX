@@ -1,16 +1,7 @@
 "use server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../auth";
 import db from "@repo/db/client";
 
-export async function getUserTransactions() {
-    const session = await getServerSession(authOptions);
-    const userId = session?.user?.id;
-
-    if (!userId) {
-        throw new Error("User is not authenticated");
-    }
-
+export async function getUserTransactions(userId: string) {
     const userWithTransfers = await db.user.findUnique({
         where: { id: userId },
         include: {

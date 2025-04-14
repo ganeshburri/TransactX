@@ -39,6 +39,11 @@ export const authOptions = {
                             password: hashedPassword
                         }
                     });
+                    await db.balance.create({
+                        data: {
+                            userId: user.id
+                        }
+                    });
                     return {
                         id: user.id,
                         name: user.name,

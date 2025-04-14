@@ -7,7 +7,7 @@ import { authOptions } from "../auth";
 export async function getBalance() {
     const session = await getServerSession(authOptions);
     const userId = session?.user?.id;
-    const balance = await db.balance.findFirst({
+    const balance = await db.balance.findUnique({
         where: { userId }
     });
     return {
