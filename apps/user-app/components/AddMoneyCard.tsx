@@ -56,16 +56,22 @@ export const AddMoney = () => {
             catch(e) {
                 console.log(e)
             }
-        },2000);
+        },1000);
     };
 
     return (
         <Card title="Add Money">
             <div className="w-full">
-                <TextInput label="Amount" placeholder="Amount" onChange={(val) => {
-                    setAmount(Number(val))
-                }} />
-
+                <TextInput 
+                    label="Amount" 
+                    placeholder="Amount" 
+                    type="number"
+                    min={0}
+                    onChange={(val) => {
+                        const numericValue = Number(val);
+                        setAmount(numericValue);
+                    }}
+                />
                 <div className="py-4 text-left">Bank</div>
 
                 <Select
@@ -77,7 +83,17 @@ export const AddMoney = () => {
                 />
 
                 <div className="flex justify-center pt-4">
-                    <Button onClick={handleAddMoneyClick}>Add Money</Button>
+                    <Button 
+                        onClick={() => {
+                            if (amount <= 0) {
+                                alert("Please enter a valid amount greater than 0.");
+                                return;
+                            }
+                            handleAddMoneyClick();
+                        }}
+                    >
+                        Add Money
+                    </Button>
                 </div>
             </div>
         </Card>
