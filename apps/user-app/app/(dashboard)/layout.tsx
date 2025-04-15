@@ -4,10 +4,10 @@ import { SideBarItem } from "../../components/SideBarItem";
 export default function Layout({ children }: { children: React.ReactNode }): JSX.Element {
     return (
         <div className="flex">
-            <div className="w-72 border-r border-slate-300 min-h-screen mr-4 pt-28">
+            <div className="w-72 border-r border-slate-300 min-h-screen mr-4 pt-28 hidden md:grid">
                 <div>
                     <SideBarItem href="/dashboard" icon={<HomeIcon />} title="Home" />
-                    <SideBarItem href="/transfer" icon={<TransferIcon />} title="Transfer" />
+                    <SideBarItem href="/transfer" icon={<TransferIcon />} title="Add Money" />
                     <SideBarItem href="/transactions" icon={<TransactionsIcon />} title="Transactions" />
                     <SideBarItem href={"/p2p"} icon={<P2PTransferIcon />} title="P2P Transfer" />
                 </div>

@@ -23,8 +23,8 @@ export default async function TransferPage() {
 
     return (
         <div>
-            <div className="text-2xl text-[#4F7DF3] pt-8 mb-8 font-bold">
-                Transfer
+            <div className="text-2xl text-[#4F7DF3] pt-8 mb-8 mx-5 font-bold">
+                Add Money
             </div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 p-4">
                 <div>

@@ -85,7 +85,7 @@ function AuthForm({ isSignUp }: { isSignUp: boolean }) {
             )}
             <InputField
                 label="Phone Number"
-                type="tel"
+                type="number"
                 placeholder="e.g. +1234567890"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
