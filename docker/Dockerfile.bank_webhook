@@ -1,0 +1,27 @@
+# Use the official Node.js image as the base image
+FROM node:20.12.0-alpine3.19
+
+# Set the working directory inside the container
+WORKDIR /usr/src/app
+
+# Copy essential configuration files
+COPY package.json package-lock.json turbo.json ./
+
+# Copy application and package source code
+COPY apps/bank-webhook ./apps/bank-webhook
+COPY packages ./packages
+
+# Install dependencies
+RUN npm install
+
+# Generate the Prisma Client
+RUN npm run db:generate
+
+# Build the application
+RUN npm run build
+
+# Expose port 3003 for the bank-webhook
+EXPOSE 3003
+
+# Set the default command to start the bank-webhook
+CMD ["npm", "run", "start-bank-webhook"]
