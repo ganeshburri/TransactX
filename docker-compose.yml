@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  user-app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.user
+    ports:
+      - "3000:3000"
+    environment:
+      NEXTAUTH_SECRET: your_secret_here
+      NEXTAUTH_URL: http://localhost:3000
+      NEXT_PUBLIC_BANK_WEBHOOK_URL: http://localhost:3003/hdfcwebhook
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+    depends_on:
+      - postgres
+      - bank-webhook
+    command: sh -c "npx prisma migrate dev --schema=./packages/db/prisma/schema.prisma && npm run start-user-app"
+
+  bank-webhook:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.bank_webhook
+    ports:
+      - "3003:3003"
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+    depends_on:
+      - postgres
+    command: sh -c "npx prisma migrate dev --schema=./packages/db/prisma/schema.prisma && npm run start-bank-webhook"
+
+  postgres:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgdata:
