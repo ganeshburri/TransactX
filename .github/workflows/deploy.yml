@@ -1,0 +1,51 @@
+# Workflow name
+name: Build and Deploy to Docker Hub
+
+# Trigger the workflow on push events to the main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    # Specify the runner environment
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the repository code
+    - name: Check Out Repo
+      uses: actions/checkout@v2
+
+    # Step 2: Log in to Docker Hub using credentials stored in GitHub Secrets
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }} # Docker Hub username
+        password: ${{ secrets.DOCKER_PASSWORD }} # Docker Hub password
+
+    # Step 3: Build and Push Docker image for the first Dockerfile
+    - name: Build and Push Docker image (user App)
+      uses: docker/build-push-action@v2
+      with:
+        context: . # Path to the Docker build context
+        file: ./docker/Dockerfile.user # Path to the first Dockerfile
+        push: true # Push the image to Docker Hub
+        tags: ganeshvarma1/user-app:latest # Replace with your Docker Hub username and repository
+
+    # Step 3.1: Build and Push Docker image for the second Dockerfile
+    - name: Build and Push Docker image (bank-webhook App)
+      uses: docker/build-push-action@v2
+      with:
+        context: . # Path to the Docker build context
+        file: ./docker/Dockerfile.bank_webhook # Path to the second Dockerfile
+        push: true # Push the image to Docker Hub
+        tags: ganeshvarma1/bank-webhook:latest # Replace with your Docker Hub username and repository
+
+    # Step 4: Verify the pushed Docker image by pulling it from Docker Hub
+    - name: Verify Pushed Image
+      run: docker pull ganeshvarma1/user-app:latest # Replace with your Docker Hub username and repository
+
+    # Step 4.1: Verify the pushed Docker image by pulling it from Docker Hub
+    - name: Verify Pushed Image
+      run: docker pull ganeshvarma1/bank-webhook:latest # Replace with your Docker Hub username and repository
