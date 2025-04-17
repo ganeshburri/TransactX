@@ -33,7 +33,7 @@ jobs:
         push: true # Push the image to Docker Hub
         tags: ganeshvarma1/user-app:latest # Replace with your Docker Hub username and repository
         build-args: |
-        NEXT_PUBLIC_BANK_WEBHOOK_URL=${{ secrets.NEXT_PUBLIC_BANK_WEBHOOK_URL }}
+          NEXT_PUBLIC_BANK_WEBHOOK_URL=${{ secrets.NEXT_PUBLIC_BANK_WEBHOOK_URL }}
 
     # Step 3.1: Build and Push Docker image for the second Dockerfile
     - name: Build and Push Docker image (bank-webhook App)
