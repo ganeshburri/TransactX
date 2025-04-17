@@ -10,6 +10,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "TransactX",
   description: "Your Money, Your Way -TransactX.",
+  icons: {
+    icon: '/favicon.png',
+  }
 };
 
 export default function RootLayout({

@@ -38,7 +38,7 @@ export const AddMoney = () => {
         //make a request to Bank webhook
         setTimeout(async()=> {
             try {
-                const res = await axios.post(process.env.NEXT_PUBLIC_BANK_WEBHOOK_URL || "http://localhost:3003/hdfcwebhook",
+                const res = await axios.post(process.env.NEXT_PUBLIC_BANK_WEBHOOK_URL || "",
                     {
                         token,
                         user_identifier: userId,
