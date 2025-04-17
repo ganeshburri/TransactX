@@ -1,0 +1,28 @@
+name: Build Succeeds On PR # Name of the workflow.
+
+on:
+  pull_request: # Trigger the workflow on pull requests
+    branches:
+      - main # Only run the workflow for pull requests targeting the main branch
+
+jobs:
+  build: # Name of the job
+    runs-on: ubuntu-latest # Specify the runner environment as the latest Ubuntu version
+    steps:
+      - uses: actions/checkout@v3 # Check out the repository code
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3 # Set up Node.js environment
+        with:
+          node-version: 'lts/*' # Specify the Node.js version to use
+      
+      - name: Install Dependencies
+        run: npm install # Install project dependencies using npm
+        
+      - name: Generate Prisma Client
+        run: npm run db:generate
+        
+      - name: Run Build
+        run: npm run build # Run the build script defined in package.json
