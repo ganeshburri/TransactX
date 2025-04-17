@@ -49,3 +49,40 @@ jobs:
     # Step 4.1: Verify the pushed Docker image by pulling it from Docker Hub
     - name: Verify Pushed Image
       run: docker pull ganeshvarma1/bank-webhook:latest # Replace with your Docker Hub username and repository
+
+    # Step 5: Deploy the Docker images to an EC2 instance
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@master
+      with:
+        # Hostname or IP address of the EC2 instance
+        host: ${{ secrets.SSH_HOST }}
+        # Username for SSH login
+        username: ${{ secrets.SSH_USERNAME }}
+        # Private SSH key stored in GitHub Secrets
+        key: ${{ secrets.SSH_KEY }}
+        # Commands to execute on the EC2 instance
+        script: |
+          # Pull the latest Docker image of user-app from Docker Hub
+          sudo docker pull ganeshvarma1/user-app:latest
+          # Stop the currently running container (if any)
+          sudo docker stop user-app || true
+          # Remove the stopped container (if any)
+          sudo docker rm user-app || true
+          # Run a new container with the latest image and pass environment variables
+          sudo docker run -d --name user-app -p 3000:3000 \
+          -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+          -e NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
+          -e NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
+          -e NEXT_PUBLIC_BANK_WEBHOOK_URL=${{ secrets.NEXT_PUBLIC_BANK_WEBHOOK_URL }} \
+          -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
+          ganeshvarma1/user-app:latest
+          # Pull the latest Docker image of bank-webhook from Docker Hub
+          sudo docker pull ganeshvarma1/bank-webhook:latest
+          # Stop the currently running container (if any)
+          sudo docker stop bank-webhook || true
+          # Remove the stopped container (if any)
+          sudo docker rm bank-webhook || true
+          # Run a new container with the latest image and pass environment variables
+          sudo docker run -d --name bank-webhook -p 3001:3003 \
+          -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
+          ganeshvarma1/bank-webhook:latest
