@@ -1,58 +1,93 @@
-# Turborepo Tailwind CSS starter
+# 💸 TransactX
 
-This Turborepo starter is maintained by the Turborepo core team.
+**TransactX** is a modern, lightweight Paytm-like digital wallet app — built for seamless peer-to-peer transfers, wallet top-ups, and real-time transaction history. The project is architected as a monorepo using Turborepo, enabling shared code, fast builds, and a scalable developer workflow across the Next.js app, simulated bank-webhook service, and Prisma-based database layer. Authentication is handled securely via **NextAuth**, and **CI/CD** is powered by **GitHub Actions**. Both the **Next.js App** and the **Express bank-webhook** service are containerized with **Docker** and deployed on **AWS EC2**, ensuring a consistent and production-ready environment.
 
-## Using this example
+## ✨ Features
+- 👤 **JWT Auth with NextAuth** — Secure signup/signin with JWT strategy
+- 💸 **P2P Transfers** — Send money via registered mobile number
+- 🏦 **Simulated Bank Webhook** — Add money to wallet through a dummy bank trigger
+- 🧾 **Transaction History** — View sent and received payments
+- 📈 **Top-up Logs** — Track “Add Money” actions separately
 
-Run the following command:
+## 🛠 Tech Stack
 
-```sh
-npx create-turbo@latest -e with-tailwind
+| Layer       | Tech Used                              |
+|-------------|----------------------------------------|
+| **Monorepo**| Turborepo                              |
+| **Frontend**| Next.js (App Router), Tailwind CSS     |
+| **Backend** | Next.js API Routes, Prisma ORM         |
+| **Auxiliary Backend** | Express                      |
+| **Database**| PostgreSQL                             |
+| **Auth**    | NextAuth.js (JWT strategy)             |
+| **Language**| TypeScript                             |
+| **DevOps**  | Docker, Docker Compose, GitHub Actions |
+
+## ☁️ Deployment
+- Deployed both the **Next.js App** and the **bank-webhook** service to **AWS EC2** using **Docker**, ensuring a consistent and production-ready environment.
+  
+## 📁 Folder Structure
+```
+TransactX/
+├── .github/
+│   └── workflows/               # GitHub Actions CI/CD
+├── apps/
+│   └── bank-webhook/            # Express app (Auxiliary Backend)
+│   └── merchant-app/            # Next.js app
+│   └── user-app/                # Next.js app
+|       └── .env.example         # Environment variable template
+├── docker/
+│   └── Dockerfile.user          # Dockerfile for user-app
+│   └── Dockerfile.bank_webhook  # Dockerfile for bank-webhook
+├── packages/
+│   └── db/                      # Prisma schema and database client
+|       └── .env.example         # Environment variable template
+│   └── ui/                      # shared ui
+├── docker-compose.yml           # Local dev orchestration
+├── package.json           
+├── turbo.json                   # Turborepo pipeline config
+└── README.md
 ```
 
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `web`: another [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Building packages/ui
-
-This example is set up to produce compiled styles for `ui` components into the `dist` directory. The component `.tsx` files are consumed by the Next.js apps directly using `transpilePackages` in `next.config.ts`. This was chosen for several reasons:
-
-- Make sharing one `tailwind.config.ts` to apps and packages as easy as possible.
-- Make package compilation simple by only depending on the Next.js Compiler and `tailwindcss`.
-- Ensure Tailwind classes do not overwrite each other. The `ui` package uses a `ui-` prefix for it's classes.
-- Maintain clear package export boundaries.
-
-Another option is to consume `packages/ui` directly from source without building. If using this option, you will need to update the `tailwind.config.ts` in your apps to be aware of your package locations, so it can find all usages of the `tailwindcss` class names for CSS compilation.
-
-For example, in [tailwind.config.ts](packages/tailwind-config/tailwind.config.ts):
-
-```js
-  content: [
-    // app content
-    `src/**/*.{js,ts,jsx,tsx}`,
-    // include packages if not transpiling
-    "../../packages/ui/*.{js,ts,jsx,tsx}",
-  ],
+## ⚙️ Installation & Setup
+### 1. Clone the Repository
+```bash
+git clone https://github.com/ganeshburri/TransactX.git
+cd TransactX
 ```
 
-If you choose this strategy, you can remove the `tailwindcss` and `autoprefixer` dependencies from the `ui` package.
+### 2. Install Dependencies
+```bash
+npm install
+```
 
-### Utilities
+### 3. Set Up Environment Variables
+Create `.env` files in both the `user-app/` and `db/` directories and add required env variables.
 
-This Turborepo has some additional tools already setup for you:
+### 4. Configure the Database
+```bash
+cd packages/db
+#run
+npx prisma migrate dev --name init
+#run
+npx prisma generate
+```
 
-- [Tailwind CSS](https://tailwindcss.com/) for styles
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+### 5. Start the Development Server
+```bash
+npm run dev
+```
+## ⚙️ Installation & Setup via Docker
+```
+# Start app + Postgres via Docker Compose
+# install Docker
+# run
+docker-compose up --build
+```
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature-branch`).
+3. Commit your changes (`git commit -m 'Add new feature'`).
+4. Push to your branch (`git push origin feature-branch`).
+5. Create a pull request.
