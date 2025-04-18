@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --max-warnings 0",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "prebuild": "npm --prefix ../../packages/ui run build && npx prisma generate --schema=../../packages/db/prisma/schema.prisma"
   },
   "dependencies": {
     "@repo/db": "*",
