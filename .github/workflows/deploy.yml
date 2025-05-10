@@ -77,6 +77,7 @@ jobs:
           -e NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
           -e NEXT_PUBLIC_BANK_WEBHOOK_URL=${{ secrets.NEXT_PUBLIC_BANK_WEBHOOK_URL }} \
           -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
+          -e TZ=Asia/Kolkata \
           ganeshvarma1/user-app:latest
           # Pull the latest Docker image of bank-webhook from Docker Hub
           sudo docker pull ganeshvarma1/bank-webhook:latest
