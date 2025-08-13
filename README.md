@@ -1,4 +1,4 @@
-# 💸 TransactX
+# 💸 TransactX - A Digital Wallet
 
 **TransactX** is a modern, lightweight Paytm-like digital wallet app — built for seamless peer-to-peer transfers, wallet top-ups, and real-time transaction history. The project is architected as a monorepo using Turborepo, enabling shared code, fast builds, and a scalable developer workflow across the Next.js app, simulated bank-webhook service, and Prisma-based database layer. Authentication is handled securely via **NextAuth**, and **CI/CD** is powered by **GitHub Actions**. Both the **Next.js App** and the **Express bank-webhook** service are containerized with **Docker** and deployed on **AWS EC2**, ensuring a consistent and production-ready environment.
 
